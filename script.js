@@ -1,9 +1,5 @@
 // gets input from the user
-let n1 = prompt("Please enter the first number");
-n1 = parseInt(n1);
-let n2 = prompt("Please enter the second number");
-n2 = parseInt(n2);
-const chooseoperator = prompt("Please choose the operator + - * /");
+const calcInput = document.getElementById("result");
 // addition
 function addition(num1, num2) {
   return num1 + num2;
@@ -41,5 +37,29 @@ function operate(operator, n1, n2) {
       break;
   }
 }
+function dis(val) {
+  calcInput.value += val;
+}
 
-operate(chooseoperator, n1, n2);
+function clr() {
+  calcInput.value = "";
+}
+if (calcInput.innerText.includes("=")) {
+  if (calcInput.innerText.includes("+")) {
+    const splitStuff = calcInput.innerText.split("+");
+    clr();
+    calcInput.value = operate("+", int(splitStuff[0]), int(splitStuff[1]));
+  } else if (calcInput.innerText.includes("-")) {
+    const splitStuff = calcInput.innerText.split("-");
+    clr();
+    calcInput.value = operate("-", int(splitStuff[0]), int(splitStuff[1]));
+  } else if (calcInput.innerText.includes("*")) {
+    const splitStuff = calcInput.innerText.split("*");
+    clr();
+    calcInput.value = operate("*", int(splitStuff[0]), int(splitStuff[1]));
+  } else if (calcInput.innerText.includes("/")) {
+    const splitStuff = calcInput.innerText.split("/");
+    clr();
+    calcInput.value = operate("/", int(splitStuff[0]), int(splitStuff[1]));
+  }
+}
