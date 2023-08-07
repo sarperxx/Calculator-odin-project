@@ -100,3 +100,11 @@ function back() {
   currentOperand.textContent = value;
   storedNumber = currentOperand.textContent;
 }
+window.addEventListener("keydown", function (e) {
+  const buttonkey = document.querySelector(
+    `input[type=button][value="${e.key}"]`
+  );
+  console.log(buttonkey);
+  storedNumber += buttonkey.value;
+  currentOperand.textContent = storedNumber;
+});
