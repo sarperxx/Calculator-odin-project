@@ -20,7 +20,9 @@ function multiply(num1, num2) {
 }
 // division
 function division(num1, num2) {
-  return num1 / num2;
+  let divide = num1 / num2;
+  if (divide == "Infinity") return "Error";
+  return divide;
 }
 
 function operate(operator, n1, n2) {
@@ -50,8 +52,7 @@ let result = "";
 currentOperand.textContent = 0;
 
 function clr() {
-  currentOperand.textContent = "";
-  previousOperand.textContent = "";
+  location.reload();
 }
 // pop out numbers
 numberButtons.forEach((number) => {
@@ -63,6 +64,9 @@ numberButtons.forEach((number) => {
 
 operatorButtons.forEach((operator) => {
   operator.addEventListener("click", function () {
+    if (firstNumber && storedNumber) {
+      makeResult();
+    }
     // save the first number
     firstNumber = storedNumber;
 
@@ -76,17 +80,23 @@ operatorButtons.forEach((operator) => {
 });
 
 equalsKey.addEventListener("click", function () {
-  console.log("FirstNumber" + firstNumber + "Stored" + storedNumber);
+  makeResult();
+});
 
+function makeResult() {
+  console.log("FirstNumber" + firstNumber + "Stored" + storedNumber);
   // operates the result
-  result = operate(
-    clickedOperator,
-    parseInt(firstNumber),
-    parseInt(storedNumber)
-  );
+  result = operate(clickedOperator, Number(firstNumber), Number(storedNumber));
 
   currentOperand.textContent = result;
   previousOperand.textContent =
     firstNumber + " " + clickedOperator + " " + storedNumber;
   storedNumber = result;
-});
+}
+
+function back() {
+  let value = String(currentOperand.textContent);
+  value = value.slice(0, value.lastIndexOf("_"));
+  currentOperand.textContent = value;
+  storedNumber = currentOperand.textContent;
+}

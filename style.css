@@ -25,5 +25,9 @@ input[type="text"] {
 }
 
 #previous-operand {
-  font-size: 16px;
+  text-align: right;
+}
+
+#current-operand {
+  text-align: right;
 }
